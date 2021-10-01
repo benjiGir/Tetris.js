@@ -1,0 +1,33 @@
+* {
+    font-family: 'Press Start 2P', cursive;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 30vw auto 30vw;
+    grid-template-rows: 25vh auto 25vh;
+}
+
+.container {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40vw;
+    height: 50vh;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    width: 30vw;
+    height: 5vh;
+    margin: 5% 0;
+}
+
+.btn > button {
+    width: 100%;
+    font-size: 2rem;
+}
+
