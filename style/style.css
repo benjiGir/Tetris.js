@@ -18,7 +18,7 @@
     height: 50vh;
 }
 
-.btn {
+.btn-container {
     display: flex;
     justify-content: center;
     width: 30vw;
@@ -26,8 +26,13 @@
     margin: 5% 0;
 }
 
-.btn > button {
+.btn {
     width: 100%;
     font-size: 2rem;
+}
+
+.btn > a {
+    text-decoration: none;
+    color: #181818;
 }
 
