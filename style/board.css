@@ -1,0 +1,5 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 30vw auto 30vw;
+    grid-template-rows: 20vh auto 20vh;
+}
