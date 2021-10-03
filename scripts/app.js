@@ -14,6 +14,9 @@ const moves = {
     [KEY.SPACE]: (p) => ({ ...p, y: p.y + 1})
 }
 
+let requestId = null
+let time = { start: 0, elapsed: 0, level: 1000 }
+
 function handleKeyPress(event) {
     event.preventDefault()
 
@@ -40,10 +43,37 @@ function addEventListener() {
     document.addEventListener('keydown', handleKeyPress)
 }
 
+function animate(now = 0) {
+    time.elapsed = now - time.start
+
+    if (time.elapsed > time.level) {
+        time.start = now
+        drop()
+    }
+
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    
+    board.piece.draw()
+    requestId = requestAnimationFrame(animate)
+}
+
+function drop() {
+    let p = moves[KEY.DOWN](board.piece)
+    if (board.valid(p)) {
+        board.piece.move(p)
+    }
+}
+
 function play() {
     board = new Board(ctx)
-    draw()
     addEventListener()
+
+    if (requestId) {
+        cancelAnimationFrame(requestId)
+    }
+
+    time.start = performance.now()
+    animate()
 }
 
 function draw() {
