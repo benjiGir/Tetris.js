@@ -4,13 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style/reset.css" />
-    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="../style/reset.css" />
+    <link rel="stylesheet" href="../style/board.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Press+Start+2P"
       rel="stylesheet"
     />
     <title>Tetris.js</title>
   </head>
-  <body></body>
+  <body class="wrapper">
+    <main class="grid">
+      <canvas id="board" class="game-board"></canvas>
+      <div class="left-column">
+        <div>
+          <h1>Tetris</h1>
+          <p>Score: <span class="score">0</span></p>
+          <p>Lines: <span class="lines">0</span></p>
+          <p>Level: <span class="level">0</span></p>
+          <canvas id="next" class="next"></canvas>
+        </div>
+        <button onclick="play()" class="btn-play">Play</button>
+      </div>
+    </main>
+    <script type="text/javascript" src="../scripts/constants.js"></script>
+    <script type="text/javascript" src="../scripts/board.js"></script>
+    <script type="text/javascript" src="../scripts/piece.js"></script>
+    <script type="text/javascript" src="../scripts/app.js"></script>
+  </body>
 </html>
