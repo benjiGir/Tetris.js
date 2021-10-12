@@ -7,15 +7,31 @@ ctx.canvas.height = ROWS * BLOCK_SIZE
 ctx.scale(BLOCK_SIZE, BLOCK_SIZE)
 
 const moves = {
-    [KEY.LEFT]: (p) => ({ ...p, x: p.x - 1}),
-    [KEY.RIGHT]: (p) => ({ ...p, x: p.x + 1}),
-    [KEY.DOWN]: (p) => ({ ...p, y: p.y + 1}),
+    [KEY.LEFT]: (p) => ({
+        ...p,
+        x: p.x - 1
+    }),
+    [KEY.RIGHT]: (p) => ({
+        ...p,
+        x: p.x + 1
+    }),
+    [KEY.DOWN]: (p) => ({
+        ...p,
+        y: p.y + 1
+    }),
     [KEY.UP]: (p) => board.rotate(p),
-    [KEY.SPACE]: (p) => ({ ...p, y: p.y + 1})
+    [KEY.SPACE]: (p) => ({
+        ...p,
+        y: p.y + 1
+    })
 }
 
 let requestId = null
-let time = { start: 0, elapsed: 0, level: 1000 }
+let time = {
+    start: 0,
+    elapsed: 0,
+    level: 1000
+}
 
 function handleKeyPress(event) {
     event.preventDefault()
@@ -48,12 +64,10 @@ function animate(now = 0) {
 
     if (time.elapsed > time.level) {
         time.start = now
-        drop()
+        board.drop()
     }
 
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-    
-    board.piece.draw()
+    draw()
     requestId = requestAnimationFrame(animate)
 }
 
@@ -77,8 +91,8 @@ function play() {
 }
 
 function draw() {
-    const { width, height } = ctx.canvas
-    ctx.clearRect(0, 0, width, height)
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
+    board.draw()
     board.piece.draw()
 }
