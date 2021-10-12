@@ -2,7 +2,8 @@ class Board {
   constructor(ctx) {
     this.ctx = ctx
     this.grid = this.getEmptyBoard()
-    this.piece = new Piece(ctx)
+    this.typeId = randomizeTetrominoType()
+    this.piece = new Piece(ctx, this.typeId.next().value)
   }
 
   getEmptyBoard() {
@@ -54,7 +55,8 @@ class Board {
       this.piece.move(p)
     } else {
       this.freeze()
-      this.piece = new Piece(this.ctx)
+      this.typeId = randomizeTetrominoType()
+      this.piece = new Piece(this.ctx, this.typeId.next().value)
     }
   }
 
@@ -78,4 +80,5 @@ class Board {
       })
     })
   }
+
 }
