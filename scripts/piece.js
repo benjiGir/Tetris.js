@@ -3,10 +3,9 @@ class Piece {
     this.ctx = ctx
 
     this.typeId = typeId
-    console.log(this.typeId);
     this.shape = SHAPES[typeId]
-
     this.color = COLORS[Math.floor(Math.random() * 7)]
+    console.log(this.color);
 
     this.x = 3
     this.y = 0
@@ -39,8 +38,7 @@ function* randomizeTetrominoType() {
   const firstPiece = ['I', 'J', 'L', 'T'][Math.floor(Math.random() * 4)]
   yield firstPiece
 
-  console.log("ici");
-  let history = ['S', 'Z', 'O', firstPiece]
+  let history = ['S', 'Z', 'S', firstPiece]
 
   while (true) {
     let i

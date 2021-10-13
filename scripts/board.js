@@ -55,7 +55,6 @@ class Board {
       this.piece.move(p)
     } else {
       this.freeze()
-      this.typeId = randomizeTetrominoType()
       this.piece = new Piece(this.ctx, this.typeId.next().value)
     }
   }
