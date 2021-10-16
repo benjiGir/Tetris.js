@@ -49,8 +49,6 @@ function handleKeyPress(event) {
         if (board.valid(p)) {
             board.piece.move(p)
         }
-
-        draw()
     }
 }
 
@@ -72,13 +70,6 @@ function animate(now = 0) {
 
     draw()
     requestId = requestAnimationFrame(animate)
-}
-
-function drop() {
-    let p = moves[KEY.DOWN](board.piece)
-    if (board.valid(p)) {
-        board.piece.move(p)
-    }
 }
 
 function play() {
