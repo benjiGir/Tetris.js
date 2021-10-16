@@ -64,7 +64,10 @@ function animate(now = 0) {
 
     if (time.elapsed > time.level) {
         time.start = now
-        board.drop()
+        if (!board.drop()) {
+            gameOver()
+            return
+        }
     }
 
     draw()
@@ -95,4 +98,14 @@ function draw() {
 
     board.draw()
     board.piece.draw()
+}
+
+function gameOver() {
+    cancelAnimationFrame(requestId)
+
+    ctx.fillStyle = 'black'
+    ctx.fillRect(1, 3, 8, 1.2)
+    ctx.font = '1px Arial'
+    ctx.fillStyle = 'red'
+    ctx.fillText('GAME OVER', 1.8, 4)
 }

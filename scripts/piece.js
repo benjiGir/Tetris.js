@@ -5,7 +5,6 @@ class Piece {
     this.typeId = typeId
     this.shape = SHAPES[typeId]
     this.color = COLORS[Math.floor(Math.random() * 7)]
-    console.log(this.color);
 
     this.x = 3
     this.y = 0
