@@ -93,20 +93,12 @@ function animate(now = 0) {
     requestId = requestAnimationFrame(animate)
 }
 
-function play() {
-    board = new Board(ctx, ctxNext)
-    addEventListener()
-
-    if (requestId) {
-        cancelAnimationFrame(requestId)
-    }
-
-    time.start = performance.now()
-    animate()
-}
-
 function draw() {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    const {
+        width,
+        height
+    } = ctx.canvas
+    ctx.clearRect(0, 0, width, height)
 
     board.draw()
     board.piece.draw()
@@ -139,4 +131,16 @@ function resetGame() {
         elapsed: 0,
         level: LEVEL[0]
     }
+}
+
+function play() {
+    resetGame()
+    addEventListener()
+
+    if (requestId) {
+        cancelAnimationFrame(requestId)
+    }
+
+    time.start = performance.now()
+    animate()
 }

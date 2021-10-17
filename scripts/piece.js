@@ -6,7 +6,7 @@ class Piece {
     this.shape = SHAPES[typeId]
     this.color = COLORS[Math.floor(Math.random() * 7)]
 
-    this.x = 3
+    this.x = 0
     this.y = 0
   }
 

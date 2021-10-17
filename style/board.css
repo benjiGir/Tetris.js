@@ -5,7 +5,7 @@
 .wrapper {
     display: grid;
     grid-template-columns: 20vw auto 20vw;
-    grid-template-rows: 10vh 70vh 20vh;
+    grid-template-rows: 10vh 50vh 40vh;
 }
 
 .grid {

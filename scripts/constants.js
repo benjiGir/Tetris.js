@@ -1,5 +1,5 @@
-const COLS = 18
-const ROWS = 25
+const COLS = 10
+const ROWS = 21
 const BLOCK_SIZE = 30
 
 const LINES_PER_LEVEL = 10

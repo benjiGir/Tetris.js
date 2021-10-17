@@ -63,13 +63,16 @@ class Board {
       }
       this.setCurrentPiece()
     }
-
     return true
   }
 
   setNextPiece() {
+    const {
+      width,
+      height
+    } = this.ctxNext.canvas
     this.nextPiece = new Piece(this.ctxNext, this.typeId.next().value)
-    this.ctxNext.clearRect(0, 0, this.ctxNext.canvas.width, this.ctxNext.canvas.heigth)
+    this.ctxNext.clearRect(0, 0, width, height)
     this.nextPiece.draw()
   }
 
