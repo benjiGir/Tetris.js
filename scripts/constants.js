@@ -2,6 +2,8 @@ const COLS = 18
 const ROWS = 25
 const BLOCK_SIZE = 30
 
+const LINES_PER_LEVEL = 10
+
 const KEY = {
     LEFT: 37,
     UP: 38,
@@ -72,3 +74,13 @@ const POINTS = {
     HARD_DROP: 2
 }
 Object.freeze(POINTS)
+
+const LEVEL = {
+    0: 800,
+    1: 720,
+    2: 630,
+    3: 550,
+    4: 410,
+    5: 300
+}
+Object.freeze(LEVEL)

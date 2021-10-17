@@ -1,9 +1,11 @@
 class Board {
-  constructor(ctx) {
+  constructor(ctx, ctxNext) {
     this.ctx = ctx
+    this.ctxNext = ctxNext
     this.grid = this.getEmptyBoard()
     this.typeId = randomizeTetrominoType()
-    this.piece = new Piece(ctx, this.typeId.next().value)
+    this.setNextPiece()
+    this.setCurrentPiece()
   }
 
   getEmptyBoard() {
@@ -59,10 +61,23 @@ class Board {
       if (this.piece.y === 0) {
         return false
       }
-      this.piece = new Piece(this.ctx, this.typeId.next().value)
+      this.setCurrentPiece()
     }
 
     return true
+  }
+
+  setNextPiece() {
+    this.nextPiece = new Piece(this.ctxNext, this.typeId.next().value)
+    this.ctxNext.clearRect(0, 0, this.ctxNext.canvas.width, this.ctxNext.canvas.heigth)
+    this.nextPiece.draw()
+  }
+
+  setCurrentPiece() {
+    this.piece = this.nextPiece
+    this.piece.ctx = this.ctx
+    this.piece.x = 3
+    this.setNextPiece()
   }
 
   freeze() {
@@ -98,15 +113,26 @@ class Board {
 
     if (lines > 0) {
       account.score += this.getLineClearPoints(lines)
+      account.lines += lines
+
+      if (account.lines >= LINES_PER_LEVEL) {
+        account.level++
+        account.lines -= LINES_PER_LEVEL
+        time.level = LEVEL[account.level]
+      }
     }
   }
 
   getLineClearPoints(lines) {
-    return lines === 1 ? POINTS.SINGLE :
+
+    const lineClearPoints =
+      lines === 1 ? POINTS.SINGLE :
       lines === 2 ? POINTS.DOUBLE :
       lines === 3 ? POINTS.TRIPLE :
       lines === 4 ? POINTS.TETRIS :
       0
+
+    return (account.level + 1) * lineClearPoints
   }
 
 }

@@ -1,17 +1,29 @@
 const canvas = document.getElementById('board')
 const ctx = canvas.getContext('2d')
+const canvasNext = document.getElementById('next')
+const ctxNext = canvasNext.getContext('2d')
 
 ctx.canvas.width = COLS * BLOCK_SIZE
 ctx.canvas.height = ROWS * BLOCK_SIZE
-
 ctx.scale(BLOCK_SIZE, BLOCK_SIZE)
+
+ctxNext.canvas.width = 4 * BLOCK_SIZE
+ctxNext.canvas.height = 4 * BLOCK_SIZE
+ctxNext.scale(BLOCK_SIZE, BLOCK_SIZE)
 
 let accountValues = {
     score: 0,
-    lines: 0
+    lines: 0,
+    level: 0
 }
 
-
+let account = new Proxy(accountValues, {
+    set: (target, key, value) => {
+        target[key] = value
+        updateAccount(key, value)
+        return true
+    }
+})
 
 const moves = {
     [KEY.LEFT]: (p) => ({
@@ -82,7 +94,7 @@ function animate(now = 0) {
 }
 
 function play() {
-    board = new Board(ctx)
+    board = new Board(ctx, ctxNext)
     addEventListener()
 
     if (requestId) {
@@ -112,16 +124,19 @@ function gameOver() {
 
 function updateAccount(key, value) {
     let element = document.getElementById(key)
-    console.log(key);
     if (element) {
         element.textContent = value
     }
 }
 
-let account = new Proxy(accountValues, {
-    set: (target, key, value) => {
-        target[key] = value
-        updateAccount(key, value)
-        return true
+function resetGame() {
+    account.score = 0
+    account.lines = 0
+    account.level = 0
+    board = new Board(ctx, ctxNext)
+    time = {
+        start: performance.now(),
+        elapsed: 0,
+        level: LEVEL[0]
     }
-})
+}
