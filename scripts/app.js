@@ -6,6 +6,13 @@ ctx.canvas.height = ROWS * BLOCK_SIZE
 
 ctx.scale(BLOCK_SIZE, BLOCK_SIZE)
 
+let accountValues = {
+    score: 0,
+    lines: 0
+}
+
+
+
 const moves = {
     [KEY.LEFT]: (p) => ({
         ...p,
@@ -42,12 +49,14 @@ function handleKeyPress(event) {
         if (event.keyCode === KEY.SPACE) {
             while (board.valid(p)) {
                 board.piece.move(p)
+                account.score += POINTS.HARD_DROP
                 p = moves[KEY.SPACE](board.piece)
             }
-        }
-
-        if (board.valid(p)) {
+        } else if (board.valid(p)) {
             board.piece.move(p)
+            if (event.keyCode === KEY.DOWN) {
+                account.score += POINTS.SOFT_DROP
+            }
         }
     }
 }
@@ -100,3 +109,19 @@ function gameOver() {
     ctx.fillStyle = 'red'
     ctx.fillText('GAME OVER', 1.8, 4)
 }
+
+function updateAccount(key, value) {
+    let element = document.getElementById(key)
+    console.log(key);
+    if (element) {
+        element.textContent = value
+    }
+}
+
+let account = new Proxy(accountValues, {
+    set: (target, key, value) => {
+        target[key] = value
+        updateAccount(key, value)
+        return true
+    }
+})

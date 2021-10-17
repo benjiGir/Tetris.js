@@ -62,3 +62,13 @@ const SHAPES = {
         [7, 7, 0]
     ]
 }
+
+const POINTS = {
+    SINGLE: 100,
+    DOUBLE: 200,
+    TRIPLE: 300,
+    TETRIS: 800,
+    SOFT_DROP: 1,
+    HARD_DROP: 2
+}
+Object.freeze(POINTS)
